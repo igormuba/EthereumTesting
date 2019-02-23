@@ -8,6 +8,7 @@ contract token{
 	}
 
 	function transfer(address _receiver, uint _amount) public{
+		require(balances[msg.sender]>=_amount);
 		balances[msg.sender]-=_amount;
 		balances[_receiver]+=_amount;
 	}
