@@ -21,7 +21,7 @@ contract("Token", accounts =>{
 			assert.equal(balance.valueOf(), 7, "7 isn't the balance of account 0");
 		})
 		);
-	it("should have 3 tokens on account 0", ()=>
+	it("should have 3 tokens on account 1", ()=>
 		Token.deployed().then(instance=>{
 			return instance.getBalance(accounts[1]);
 		}).then(balance=>{
