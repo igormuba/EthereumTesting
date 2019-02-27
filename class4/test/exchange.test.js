@@ -29,4 +29,22 @@ contract("Exchange", accounts=>{
 			assert.equal(exchangeAllowance.valueOf(), 100, "the exchange is not allowed to move 100 tokens");
 		})
 	);
+	it("User balance should have 100 tokens,", ()=>
+		Exchange.deployed().then(instance=>{
+			instance.depositToken(erc20Address, 100);
+			return instance.getTokenBalance(accounts[0], erc20Address);
+		}).then(tokenBalance=>{
+			console.log("token balance:");
+			console.log(tokenBalance);
+			assert.equal(tokenBalance, 100, "the user does not have 100 tokens in balance");
+		})
+	);
+	it("User balance should have 100 wei", ()=>
+		Exchange.deployed().then(instance=>{
+			instance.sendTransaction({from: accounts[0], value: 100});
+			return instance.getEthBalance(accounts[0]);
+		}).then(ethBalance=>{
+			assert.equal(ethBalance, 100, "the user does not have 100 wei in balance");
+		})
+	);
 });
